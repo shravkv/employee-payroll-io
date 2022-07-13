@@ -1,0 +1,3 @@
+EmployeePayrollData{id=1, name='SK', salary=10000.0}
+EmployeePayrollData{id=2, name='SS', salary=20000.0}
+EmployeePayrollData{id=3, name='PK', salary=30000.0}

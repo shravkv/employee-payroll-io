@@ -20,8 +20,9 @@ public class EmployeePayrollService {
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
         Scanner scanner = new Scanner(System.in);
         employeePayrollService.readEmployeePayRollData(scanner);
-        employeePayrollService.writeEmployeePayrollData();
+        employeePayrollService.writeEmployeePayrollData(IOService.CONSOLE_IO);
     }
+
 
     public void readEmployeePayRollData(Scanner scanner) {
         System.out.println("Enter employee id");
@@ -34,7 +35,20 @@ public class EmployeePayrollService {
 
     }
 
-    public void writeEmployeePayrollData() {
-        System.out.println("\n writing Employee Payroll Roaster to console \n" + employeePayrollList);
+    public void writeEmployeePayrollData(IOService ioService) {
+        if (ioService.equals(IOService.CONSOLE_IO))
+            System.out.println("\n writing Employee Payroll Roaster to console \n" + employeePayrollList);
+        else if (ioService.equals(IOService.FILE_IO))
+            new EmployeePayrollFileIOService().writeData(employeePayrollList);
     }
+
+
+    public long countEntries(IOService ioService) {
+        if (ioService.equals(IOService.FILE_IO))
+            return new EmployeePayrollFileIOService().countEntries();
+        return 0;
+    }
+
+    public enum IOService {CONSOLE_IO, FILE_IO, DB_IO, REST_ID}
+
 }
